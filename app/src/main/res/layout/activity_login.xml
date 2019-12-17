@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="@dimen/splash_size"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@color/colorAccent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,17 +19,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NIM"
+        android:textColor="@android:color/white"
         android:labelFor="@+id/edtNim"/>
     <EditText
         android:id="@+id/edtNim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nim"
+        android:hint="@string/email"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="@dimen/splash_size"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password"
+        android:textColor="@android:color/white"
         android:labelFor="@+id/edtPassword"
         />
     <EditText
@@ -36,12 +41,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:inputType="textPassword"
         android:layout_marginBottom="@dimen/splash_size"/>
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
         android:text="Sign In"/>
 
 

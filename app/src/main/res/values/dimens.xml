@@ -2,7 +2,7 @@
 <resources>
     <dimen name="font_size">22sp</dimen>
     <dimen name="splash_size">22dp</dimen>
-    <dimen name="logo_size">150dp</dimen>
+    <dimen name="logo_size">180dp</dimen>
     <dimen name="login">100dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>

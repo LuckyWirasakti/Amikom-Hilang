@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189053788423",
+    "firebase_url": "https://amikom-hilang.firebaseio.com",
+    "project_id": "amikom-hilang",
+    "storage_bucket": "amikom-hilang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189053788423:android:15726632c31d272a03a5a2",
+        "android_client_info": {
+          "package_name": "com.temukangen.amikomhilang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189053788423-89h8f6hsnpdaqc8gvdtkbgdv3mvh4amu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6BRm3eaaBk5L1zCQ0T-i-DiZU_w7CH1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189053788423-89h8f6hsnpdaqc8gvdtkbgdv3mvh4amu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
