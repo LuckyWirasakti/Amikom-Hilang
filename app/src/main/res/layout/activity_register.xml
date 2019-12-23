@@ -11,14 +11,14 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/logo_size"
+        android:layout_height="120dp"
         android:src="@drawable/logo"
-        android:layout_marginBottom="@dimen/login"
+        android:layout_marginBottom="30dp"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NIM"
+        android:text="Nim"
         android:textColor="@android:color/white"
         android:labelFor="@+id/edtNim"/>
     <EditText
@@ -26,6 +26,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nim"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="@dimen/splash_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@android:color/white"
+        android:labelFor="@+id/edtName"/>
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Lucky Adhikrisna Wirsakti"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="@dimen/splash_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="@android:color/white"
+        android:labelFor="@+id/edtEmail"/>
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="lucky.30@students.amikom.ac.id"
         android:textColorHint="@android:color/white"
         android:textColor="@android:color/white"
         android:layout_marginBottom="@dimen/splash_size"/>
@@ -46,7 +74,7 @@
         android:inputType="textPassword"
         android:layout_marginBottom="@dimen/splash_size"/>
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
@@ -54,10 +82,11 @@
         android:text="Sign In"/>
     <Button
         android:layout_marginTop="10dp"
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
-        android:text="Sign Up"/>
+        android:text="Back to Login"/>
+
 </LinearLayout>

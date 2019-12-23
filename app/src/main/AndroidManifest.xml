@@ -10,8 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            ></activity>
+        <activity
             android:name=".DashboardActivity"
-            android:label="@string/title_activity_dashboard"></activity>
+            android:label="@string/title_activity_dashboard" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
