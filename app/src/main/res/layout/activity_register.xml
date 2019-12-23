@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
-        android:text="Sign In"/>
+        android:text="Sign Up"/>
     <Button
         android:layout_marginTop="10dp"
         android:id="@+id/btnLogin"
