@@ -46,31 +46,33 @@ public class ProfileFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        final DatabaseReference databaseReference = FirebaseDatabase
+        FirebaseDatabase
                 .getInstance()
                 .getReference("User")
-                .child(firebaseUser.getUid());
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String image = dataSnapshot.child("nim").getValue(String.class);
-                String imageYear = image.substring(0,2);
-                String imageName = image.replace(".","_");
-                String url = "http://www.amikom.ac.id/public/fotomhs/20"+ imageYear +"/"+ imageName +".jpg";
+                .child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String image = dataSnapshot.child("nim").getValue(String.class);
+                        String imageYear = image.substring(0,2);
+                        String imageName = image.replace(".","_");
+                        String url = "http://www.amikom.ac.id/public/fotomhs/20"+ imageYear +"/"+ imageName +".jpg";
 
-                tvName.setText(dataSnapshot.child("name").getValue(String.class));
-                tvNim.setText(dataSnapshot.child("nim").getValue(String.class));
-                Glide.with(getContext())
-                        .load(url)
-                        .centerCrop()
-                        .override(100)
-                        .placeholder(R.drawable.photo)
-                        .into(cvImage);
-            }
+                        tvName.setText(dataSnapshot.child("name").getValue(String.class));
+                        tvNim.setText(dataSnapshot.child("nim").getValue(String.class));
+                        Glide.with(getContext())
+                                .load(url)
+                                .centerCrop()
+                                .override(100)
+                                .placeholder(R.drawable.photo)
+                                .into(cvImage);
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        };
-        databaseReference.addListenerForSingleValueEvent(valueEventListener);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 }

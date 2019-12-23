@@ -4,7 +4,7 @@
     <string name="password">Password</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_report">Report</string>
     <string name="title_profile">Profile</string>
     <string name="lost_name">Kunci Motor Vario</string>
     <string name="lost_date">Senin, 19-12-2019</string>
