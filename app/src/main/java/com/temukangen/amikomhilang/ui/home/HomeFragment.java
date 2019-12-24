@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.temukangen.amikomhilang.R;
 
@@ -16,11 +18,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        return root;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = root.findViewById(R.id.rv_item_lost);
+
+        ItemAdapter itemAdapter = new ItemAdapter();
+        recyclerView.setAdapter(itemAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        return root;
     }
 }

@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin, btnRegister;
-    private EditText edtNim, edtPassword;
+    private EditText edtEmail, edtPassword;
     private FirebaseAuth fireBaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -31,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
 
         fireBaseAuth = fireBaseAuth.getInstance();
 
-        edtNim = findViewById(R.id.edtNim);
+        edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
+
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
@@ -55,17 +56,17 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nim = edtNim.getText().toString();
+                String email = edtEmail.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                if (nim.isEmpty()){
+                if (email.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Field nim are empty", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Field nim are empty", Toast.LENGTH_SHORT).show();
-                } else if(nim.isEmpty() && password.isEmpty()){
+                } else if(email.isEmpty() && password.isEmpty()){
                     Toast.makeText(LoginActivity.this,"Field are empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    fireBaseAuth.signInWithEmailAndPassword(nim, password)
+                    fireBaseAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

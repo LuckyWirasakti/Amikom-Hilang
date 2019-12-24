@@ -14,15 +14,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.temukangen.amikomhilang.R;
-import com.temukangen.amikomhilang.Report;
 
 public class ReportFragment extends Fragment {
 
     private Button btnPublish;
-    private EditText edtTitle, edtDescription;
+    private EditText edtTitle, edtDescription, edtPhoneNumber, edtLocation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +34,9 @@ public class ReportFragment extends Fragment {
 
         edtTitle = view.findViewById(R.id.edtTitle);
         edtDescription = view.findViewById(R.id.edtDescription);
+        edtPhoneNumber = view.findViewById(R.id.edtPhoneNumber);
+        edtLocation = view.findViewById(R.id.edtLocation);
+
         btnPublish = view.findViewById(R.id.btnPublish);
 
         btnPublish.setOnClickListener(new View.OnClickListener() {
@@ -43,16 +44,29 @@ public class ReportFragment extends Fragment {
             public void onClick(View v) {
                 String title = edtTitle.getText().toString();
                 String description = edtDescription.getText().toString();
+                String phoneNumber = edtPhoneNumber.getText().toString().trim();
+                String location = edtLocation.getText().toString();
 
                 if (title.isEmpty()){
                     Toast.makeText(getContext(), "Title is Empty", Toast.LENGTH_SHORT).show();
-                } else if (description.isEmpty()){
+                } else if (phoneNumber.isEmpty()){
                     Toast.makeText(getContext(), "Description is Empty", Toast.LENGTH_SHORT).show();
+                } else if (location.isEmpty()){
+                    Toast.makeText(getContext(), "Phone number is Empty", Toast.LENGTH_SHORT).show();
+                } else if (description.isEmpty()) {
+                    Toast.makeText(getContext(), "Location is Empty", Toast.LENGTH_SHORT).show();
                 } else {
+
+                    Report report = new Report();
+                    report.setTitle(title);
+                    report.setDescription(description);
+                    report.setPhoneNumber(phoneNumber);
+                    report.setLocation(location);
+
                     edtTitle.setText("");
                     edtDescription.setText("");
-
-                    Report report = new Report(title, description);
+                    edtPhoneNumber.setText("");
+                    edtLocation.setText("");
 
                     FirebaseDatabase
                             .getInstance()

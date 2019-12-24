@@ -1,36 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="@dimen/splash_size">
+    android:padding="@dimen/splash_size"
+    >
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textColor="@android:color/white" />
+        android:layout_marginBottom="10dp">
 
-    <EditText
-        android:id="@+id/edtTitle"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Title" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nim"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"/>
-    <TextView
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Phone Number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:textColor="@android:color/white" />
-    <EditText
-        android:id="@+id/edtDescription"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Location" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nim"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"/>
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Description"
+            android:inputType="textMultiLine" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnPublish"

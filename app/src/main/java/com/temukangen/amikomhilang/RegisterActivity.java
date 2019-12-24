@@ -47,16 +47,19 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 final String nim = edtNim.getText().toString();
-                 final String name = edtName.getText().toString();
-                 String email = edtEmail.getText().toString();
-                 String password = edtPassword.getText().toString();
 
-                 firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                final String nim = edtNim.getText().toString();
+                final String name = edtName.getText().toString();
+                String email = edtEmail.getText().toString();
+                String password = edtPassword.getText().toString();
+
+                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                      @Override
                      public void onComplete(@NonNull Task<AuthResult> task) {
                          if(task.isSuccessful()) {
-                             User user = new User(name, nim);
+                             User user = new User();
+                             user.setNim(nim);
+                             user.setName(name);
                              FirebaseDatabase.getInstance().getReference("User")
                                      .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                      .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
