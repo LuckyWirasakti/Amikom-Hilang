@@ -78,14 +78,13 @@
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
         android:text="Sign Up"/>
-
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        android:text="Back to Login"/>
+        android:background="@android:color/transparent"
+        android:text="Back to Login"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary" />
 
 </LinearLayout>

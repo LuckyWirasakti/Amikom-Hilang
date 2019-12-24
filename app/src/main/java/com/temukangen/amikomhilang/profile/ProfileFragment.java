@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.ui.profile;
+package com.temukangen.amikomhilang.profile;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
 
         FirebaseDatabase
                 .getInstance()
-                .getReference("User")
+                .getReference("Profile")
                 .child(firebaseUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

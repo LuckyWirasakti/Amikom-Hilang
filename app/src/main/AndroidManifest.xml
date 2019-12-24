@@ -11,7 +11,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"
             ></activity>
         <activity
@@ -20,7 +19,6 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"

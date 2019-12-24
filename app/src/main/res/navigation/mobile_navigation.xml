@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.temukangen.amikomhilang.ui.home.HomeFragment"
+        android:name="com.temukangen.amikomhilang.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.temukangen.amikomhilang.ui.report.ReportFragment"
+        android:name="com.temukangen.amikomhilang.report.ReportFragment"
         android:label="@string/title_report"
         tools:layout="@layout/fragment_report" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.temukangen.amikomhilang.ui.profile.ProfileFragment"
+        android:name="com.temukangen.amikomhilang.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

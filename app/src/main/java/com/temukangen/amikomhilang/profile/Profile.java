@@ -1,10 +1,10 @@
-package com.temukangen.amikomhilang;
+package com.temukangen.amikomhilang.profile;
 
-public class User {
+public class Profile {
 
     public String name, nim;
 
-    public User() {
+    public Profile() {
 
     }
 

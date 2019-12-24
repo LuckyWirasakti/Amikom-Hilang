@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.ui.report;
+package com.temukangen.amikomhilang.report;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,11 +63,6 @@ public class ReportFragment extends Fragment {
                     report.setPhoneNumber(phoneNumber);
                     report.setLocation(location);
 
-                    edtTitle.setText("");
-                    edtDescription.setText("");
-                    edtPhoneNumber.setText("");
-                    edtLocation.setText("");
-
                     FirebaseDatabase
                             .getInstance()
                             .getReference()
@@ -79,6 +74,10 @@ public class ReportFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Published", Toast.LENGTH_SHORT).show();
+                                        edtTitle.setText("");
+                                        edtDescription.setText("");
+                                        edtPhoneNumber.setText("");
+                                        edtLocation.setText("");
                                     } else {
                                         Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }

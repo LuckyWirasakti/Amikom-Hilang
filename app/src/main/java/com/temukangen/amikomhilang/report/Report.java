@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.ui.report;
+package com.temukangen.amikomhilang.report;
 
 public class Report {
     private String title, description, phoneNumber, location;

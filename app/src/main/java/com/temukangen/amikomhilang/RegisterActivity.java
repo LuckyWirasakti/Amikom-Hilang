@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.temukangen.amikomhilang.profile.Profile;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
 
         edtNim = findViewById(R.id.edtNim);
         edtName = findViewById(R.id.edtName);
@@ -53,30 +55,40 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                     @Override
-                     public void onComplete(@NonNull Task<AuthResult> task) {
-                         if(task.isSuccessful()) {
-                             User user = new User();
-                             user.setNim(nim);
-                             user.setName(name);
-                             FirebaseDatabase.getInstance().getReference("User")
-                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
-                                     if (task.isSuccessful()){
-                                         finish();
-                                     } else {
-                                         Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                     }
-                                 }
-                             });
-                         } else {
-                             Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                         }
-                     }
-                 });
+                if (nim.isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Field nim are empty", Toast.LENGTH_SHORT).show();
+                } else if (name.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Field name are empty", Toast.LENGTH_SHORT).show();
+                } else if(email.isEmpty()){
+                    Toast.makeText(RegisterActivity.this,"Field email are empty", Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()){
+                    Toast.makeText(RegisterActivity.this,"Field email are empty", Toast.LENGTH_SHORT).show();
+                } else{
+                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                Profile profile = new Profile();
+                                profile.setNim(nim);
+                                profile.setName(name);
+                                FirebaseDatabase.getInstance().getReference("Profile")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            finish();
+                                        } else {
+                                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
     }

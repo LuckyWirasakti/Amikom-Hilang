@@ -1,8 +1,10 @@
-package com.temukangen.amikomhilang.ui.home;
+package com.temukangen.amikomhilang.home;
 
 import com.temukangen.amikomhilang.R;
 
-public class Item {
+import java.util.ArrayList;
+
+public class HomeData {
 
     public static String[] name = new String[]{
             "Sandal Jepit",
@@ -42,5 +44,17 @@ public class Item {
             R.drawable.ahmad_yani,
             R.drawable.ahmad_yani
     };
+
+    static ArrayList<Home> getListData() {
+        ArrayList<Home> list = new ArrayList<>();
+        for (int position = 0; position < name.length; position++) {
+            Home home = new Home();
+            home.setName(name[position]);
+            home.setDescription(description[position]);
+            home.setImage(image[position]);
+            list.add(home);
+        }
+        return list;
+    }
 
 }
