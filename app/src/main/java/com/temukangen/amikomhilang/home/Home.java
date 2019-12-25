@@ -2,15 +2,17 @@ package com.temukangen.amikomhilang.home;
 
 public class Home {
 
-    private String name, description;
-    private int image;
+    private String title;
+    private String description;
+    private String location;
+    private String phoneNumber;
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -21,11 +23,19 @@ public class Home {
         this.description = description;
     }
 
-    public int getImage() {
-        return image;
+    public String getLocation() {
+        return location;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

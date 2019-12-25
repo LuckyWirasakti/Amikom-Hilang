@@ -34,11 +34,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Home home = homeArrayList.get(position);
-        Glide.with(holder.itemView.getContext())
-                .load(home.getImage())
+        /*Glide.with(holder.itemView.getContext())
+                .load(home.get())
                 .apply(new RequestOptions().override(55, 55))
-                .into(holder.img_item_photo);
-        holder.tv_item_name.setText(home.getName());
+                .into(holder.img_item_photo);*/
+        holder.tv_item_name.setText(home.getTitle());
         holder.tv_item_detail.setText(home.getDescription());
     }
 

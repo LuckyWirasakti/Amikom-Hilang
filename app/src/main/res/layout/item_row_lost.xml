@@ -12,6 +12,7 @@
         android:layout_height="55dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:src="@drawable/photo"
         tools:src="@android:color/darker_gray" />
     <LinearLayout
         android:layout_width="match_parent"

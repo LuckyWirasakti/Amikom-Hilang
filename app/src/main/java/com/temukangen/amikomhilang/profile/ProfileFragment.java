@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -32,16 +31,14 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        loadProfile(root);
         return root;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tvName = view.findViewById(R.id.tvName);
-        tvNim = view.findViewById(R.id.tvNim);
-        cvImage = view.findViewById(R.id.cvImage);
+    private void loadProfile(View root) {
+        tvName = root.findViewById(R.id.tvName);
+        tvNim = root.findViewById(R.id.tvNim);
+        cvImage = root.findViewById(R.id.cvImage);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -73,6 +70,5 @@ public class ProfileFragment extends Fragment {
                         Log.w("profileError", "onCancelled: ", databaseError.toException());
                     }
                 });
-
     }
 }
