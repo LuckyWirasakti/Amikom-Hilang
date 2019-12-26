@@ -46,7 +46,6 @@ public class HomeFragment extends Fragment {
         return root;
     }
     private void showSelectedItem(Home data) {
-        Toast.makeText(getContext(), "Kamu memilih " + data.getTitle(), Toast.LENGTH_SHORT).show();
         Intent moveWithDataIntent = new Intent(getContext(), DetailActivity.class);
         moveWithDataIntent.putExtra(DetailActivity.EXTRA_TITLE, data.getTitle());
         moveWithDataIntent.putExtra(DetailActivity.EXTRA_LOCATION, data.getLocation());

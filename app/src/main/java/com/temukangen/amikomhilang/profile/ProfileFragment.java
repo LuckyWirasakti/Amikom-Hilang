@@ -34,13 +34,6 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         loadProfile(root);
-
-        root.findViewById(R.id.detailTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), DetailActivity.class));
-            }
-        });
         return root;
     }
 

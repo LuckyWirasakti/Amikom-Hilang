@@ -66,16 +66,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 <TextView
     android:layout_width="match_parent"
-    android:text="Upload Image"
-    android:textSize="20sp"
+    android:text="Capture Image"
+    android:textSize="14sp"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"/>
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/camera"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/imagebg"
+            android:src="@drawable/ic_camera_alt_black_24dp" />
 
         <Button
             android:id="@+id/btnPublish"
