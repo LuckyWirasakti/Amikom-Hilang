@@ -1,8 +1,11 @@
 package com.temukangen.amikomhilang.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,11 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.temukangen.amikomhilang.R;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String EXTRA_DESC= "extra_desc";
-    public static final String EXTRA_TITLE= "extra_title";
-    public static final String EXTRA_LOCATION= "extra_location";
-    public static final String EXTRA_PHONE= "extra_phone";
-
     private ImageView ivImage;
     private TextView tvTitle;
     private TextView tvLocation;
@@ -34,20 +32,15 @@ public class DetailActivity extends AppCompatActivity {
         tvLocation = findViewById(R.id.tvLocation);
         tvDescription = findViewById(R.id.tvDescription);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle!=null){
-            int resint = bundle.getInt("Image");
-            ivImage.setImageResource(resint);
-        }
-
-        tvTitle.setText(getIntent().getStringExtra(EXTRA_TITLE));
-        tvDescription.setText(getIntent().getStringExtra(EXTRA_DESC));
-        tvLocation.setText(getIntent().getStringExtra(EXTRA_LOCATION));
+        tvTitle.setText(getIntent().getStringExtra("Title"));
+        tvDescription.setText(getIntent().getStringExtra("Description"));
+        tvLocation.setText(getIntent().getStringExtra("Location"));
+        ivImage.setImageBitmap(base64ToBitmap(getIntent().getStringExtra("Image")));
 
         findViewById(R.id.btnContactPerson).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openWhatsappContact(getIntent().getStringExtra(EXTRA_PHONE));
+                openWhatsappContact(getIntent().getStringExtra("PhoneNumber"));
             }
         });
     }
@@ -59,4 +52,8 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(i, ""));
     }
 
+    private Bitmap base64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+    }
 }

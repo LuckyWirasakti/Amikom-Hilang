@@ -1,23 +1,17 @@
 package com.temukangen.amikomhilang.home;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,15 +39,17 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
     private void showSelectedItem(Home data) {
-        Intent moveWithDataIntent = new Intent(getContext(), DetailActivity.class);
-        moveWithDataIntent.putExtra(DetailActivity.EXTRA_TITLE, data.getTitle());
-        moveWithDataIntent.putExtra(DetailActivity.EXTRA_LOCATION, data.getLocation());
-        moveWithDataIntent.putExtra(DetailActivity.EXTRA_PHONE, data.getPhoneNumber());
-        moveWithDataIntent.putExtra(DetailActivity.EXTRA_DESC, data.getDescription());
-        moveWithDataIntent.putExtra("Image",data.getImage());
-        startActivity(moveWithDataIntent);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra("Title", data.getTitle());
+        intent.putExtra("Location", data.getLocation());
+        intent.putExtra("PhoneNumber", data.getPhoneNumber());
+        intent.putExtra("Description", data.getDescription());
+        intent.putExtra("Image",data.getImage());
+        startActivity(intent);
     }
+
     private void getHomeData() {
         FirebaseDatabase
                 .getInstance()
