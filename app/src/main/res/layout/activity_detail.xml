@@ -19,13 +19,13 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/photo" />
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="#4D000000"
-                android:drawableStart="@drawable/ic_android_black_24dp"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:padding="8dp"
@@ -57,6 +57,7 @@
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_my_location_black_24dp" />
             <TextView
+                android:id="@+id/tvLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -74,6 +75,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
         <TextView
+            android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

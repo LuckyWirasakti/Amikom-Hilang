@@ -1,10 +1,16 @@
 package com.temukangen.amikomhilang.home;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,13 +40,21 @@ public class HomeFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.rv_item_lost);
         recyclerView.setHasFixedSize(true);
-
-
         getHomeData();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return root;
     }
-
+    private void showSelectedItem(Home data) {
+        Toast.makeText(getContext(), "Kamu memilih " + data.getTitle(), Toast.LENGTH_SHORT).show();
+        Intent moveWithDataIntent = new Intent(getContext(), DetailActivity.class);
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_TITLE, data.getTitle());
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_LOCATION, data.getLocation());
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_PHONE, data.getPhoneNumber());
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_DESC, data.getDescription());
+        moveWithDataIntent.putExtra("Image",data.getImage());
+        startActivity(moveWithDataIntent);
+    }
     private void getHomeData() {
         FirebaseDatabase
                 .getInstance()
@@ -59,6 +73,12 @@ public class HomeFragment extends Fragment {
                         Collections.reverse(list);
                         homeAdapter = new HomeAdapter(list);
                         recyclerView.setAdapter(homeAdapter);
+                        homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
+                            @Override
+                            public void onItemClicked(Home data) {
+                                showSelectedItem(data);
+                            }
+                        });
                     }
 
                     @Override
@@ -66,5 +86,6 @@ public class HomeFragment extends Fragment {
                         Log.w("homeError", "onCancelled: ", databaseError.toException());
                     }
                 });
+
     }
 }

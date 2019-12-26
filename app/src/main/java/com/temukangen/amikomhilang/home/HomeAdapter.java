@@ -6,6 +6,8 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,9 +35,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_lost, parent, false);
         return new HomeViewHolder(view);
     }
+    private OnItemClickCallback onItemClickCallback;
 
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
         Home home = homeArrayList.get(position);
         Bitmap bitmap = base64ToBitmap(home.getImage());
         Glide.with(holder.itemView.getContext())
@@ -44,6 +50,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 .into(holder.img_item_photo);
         holder.tv_item_name.setText(home.getTitle());
         holder.tv_item_detail.setText(home.getDescription());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(homeArrayList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -63,9 +75,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             tv_item_detail = itemView.findViewById(R.id.tv_item_detail);
         }
     }
-
     private Bitmap base64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(Home data);
     }
 }
