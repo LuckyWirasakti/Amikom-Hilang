@@ -1,5 +1,8 @@
 package com.temukangen.amikomhilang.home;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +37,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Home home = homeArrayList.get(position);
-        /*Glide.with(holder.itemView.getContext())
-                .load(home.get())
+        Bitmap bitmap = base64ToBitmap(home.getImage());
+        Glide.with(holder.itemView.getContext())
+                .load(bitmap)
                 .apply(new RequestOptions().override(55, 55))
-                .into(holder.img_item_photo);*/
+                .into(holder.img_item_photo);
         holder.tv_item_name.setText(home.getTitle());
         holder.tv_item_detail.setText(home.getDescription());
     }
@@ -58,5 +62,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             tv_item_name = itemView.findViewById(R.id.tv_item_name);
             tv_item_detail = itemView.findViewById(R.id.tv_item_detail);
         }
+    }
+
+    private Bitmap base64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }

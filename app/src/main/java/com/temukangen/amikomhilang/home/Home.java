@@ -6,6 +6,7 @@ public class Home {
     private String description;
     private String location;
     private String phoneNumber;
+    private String image;
 
     public String getTitle() {
         return title;
@@ -38,4 +39,13 @@ public class Home {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

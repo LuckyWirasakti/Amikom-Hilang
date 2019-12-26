@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,8 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class HomeFragment extends Fragment {
 
@@ -48,7 +47,9 @@ public class HomeFragment extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                        list = new ArrayList<>();
+                        for (Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator(); iterator.hasNext(); ) {
+                            DataSnapshot dataSnapshot1 = iterator.next();
                             Home home = dataSnapshot1.getValue(Home.class);
                             list.add(home);
                         }

@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Button btnLogin, btnRegister;
     private EditText edtNim, edtName, edtEmail, edtPassword;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
-
-        firebaseAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if(email.isEmpty()){
                     Toast.makeText(RegisterActivity.this,"Field email are empty", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()){
-                    Toast.makeText(RegisterActivity.this,"Field email are empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"Field password are empty", Toast.LENGTH_SHORT).show();
                 } else{
                     firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

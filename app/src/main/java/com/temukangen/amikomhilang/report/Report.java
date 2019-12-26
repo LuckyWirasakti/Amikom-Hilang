@@ -1,7 +1,20 @@
 package com.temukangen.amikomhilang.report;
 
 public class Report {
-    private String title, description, phoneNumber, location;
+    private String title;
+    private String description;
+    private String phoneNumber;
+    private String location;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    private String image;
 
     public Report() {
 
