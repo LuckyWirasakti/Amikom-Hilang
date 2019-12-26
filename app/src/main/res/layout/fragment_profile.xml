@@ -31,5 +31,10 @@
         android:textSize="18sp"
         android:textAlignment="center"
         />
+    <Button
+        android:id="@+id/detailTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detail Test"/>
 
 </LinearLayout>

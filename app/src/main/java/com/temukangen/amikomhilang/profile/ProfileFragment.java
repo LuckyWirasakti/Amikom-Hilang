@@ -1,5 +1,6 @@
 package com.temukangen.amikomhilang.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.home.DetailActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,6 +34,13 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         loadProfile(root);
+
+        root.findViewById(R.id.detailTest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), DetailActivity.class));
+            }
+        });
         return root;
     }
 
