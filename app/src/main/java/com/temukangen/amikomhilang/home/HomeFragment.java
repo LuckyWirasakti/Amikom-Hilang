@@ -2,19 +2,26 @@ package com.temukangen.amikomhilang.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
 
@@ -27,21 +34,96 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Home> list = new ArrayList<>();
     private HomeAdapter homeAdapter;
+    private TextInputEditText edtSearch;
+    private DatabaseReference databaseReference;
+    private FirebaseOptions options;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        edtSearch = root.findViewById(R.id.edtSearch);
         recyclerView = root.findViewById(R.id.rv_item_lost);
         recyclerView.setHasFixedSize(true);
 
         homeAdapter = new HomeAdapter(list);
         recyclerView.setAdapter(homeAdapter);
-        getHomeData();
+
+        getHome();
+        searchHome();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return root;
+    }
+
+    private void searchHome() {
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()){
+                    search(s.toString());
+                } else {
+                    getHome();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    private void search(String s) {
+        databaseReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("Report");
+        Query query = databaseReference
+                .orderByChild("title")
+                .startAt(s)
+                .endAt(s + "\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    list.clear();
+                    for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        Home home = dataSnapshot1.getValue(Home.class);
+                        list.add(home);
+                    }
+                    homeAdapter = new HomeAdapter(list);
+                    homeAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(homeAdapter);
+
+                    homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
+                        @Override
+                        public void onItemClicked(Home data) {
+                            showSelectedItem(data);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void showSelectedItem(Home data) {
@@ -55,7 +137,7 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void getHomeData() {
+    private void getHome() {
         FirebaseDatabase
                 .getInstance()
                 .getReference()
