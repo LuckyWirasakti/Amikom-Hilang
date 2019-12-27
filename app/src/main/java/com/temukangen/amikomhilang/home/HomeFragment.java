@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +35,6 @@ public class HomeFragment extends Fragment {
     private HomeAdapter homeAdapter;
     private TextInputEditText edtSearch;
     private DatabaseReference databaseReference;
-    private FirebaseOptions options;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -106,22 +104,27 @@ public class HomeFragment extends Fragment {
                         Home home = dataSnapshot1.getValue(Home.class);
                         list.add(home);
                     }
-                    homeAdapter = new HomeAdapter(list);
-                    homeAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(homeAdapter);
 
-                    homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
-                        @Override
-                        public void onItemClicked(Home data) {
-                            showSelectedItem(data);
-                        }
-                    });
+                    setAdapterValueChanged();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    private void setAdapterValueChanged() {
+        homeAdapter = new HomeAdapter(list);
+        homeAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(homeAdapter);
+
+        homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(Home data) {
+                showSelectedItem(data);
             }
         });
     }
@@ -153,17 +156,7 @@ public class HomeFragment extends Fragment {
                         }
 
                         Collections.reverse(list);
-
-                        homeAdapter = new HomeAdapter(list);
-                        homeAdapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(homeAdapter);
-
-                        homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
-                            @Override
-                            public void onItemClicked(Home data) {
-                                showSelectedItem(data);
-                            }
-                        });
+                        setAdapterValueChanged();
                     }
 
                     @Override
