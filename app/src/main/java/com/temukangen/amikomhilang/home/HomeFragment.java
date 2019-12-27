@@ -34,7 +34,11 @@ public class HomeFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.rv_item_lost);
         recyclerView.setHasFixedSize(true);
+
+        homeAdapter = new HomeAdapter(list);
+        recyclerView.setAdapter(homeAdapter);
         getHomeData();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return root;
@@ -47,6 +51,7 @@ public class HomeFragment extends Fragment {
         intent.putExtra("PhoneNumber", data.getPhoneNumber());
         intent.putExtra("Description", data.getDescription());
         intent.putExtra("Image",data.getImage());
+        intent.putExtra("Publisher", data.getPublisher());
         startActivity(intent);
     }
 
@@ -66,8 +71,11 @@ public class HomeFragment extends Fragment {
                         }
 
                         Collections.reverse(list);
+
                         homeAdapter = new HomeAdapter(list);
+                        homeAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(homeAdapter);
+
                         homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
                             @Override
                             public void onItemClicked(Home data) {

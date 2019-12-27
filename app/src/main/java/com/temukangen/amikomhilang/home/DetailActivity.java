@@ -6,19 +6,31 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView ivImage;
     private TextView tvTitle;
     private TextView tvLocation;
     private TextView tvDescription;
+    private TextView tvPublisher;
+    private CircleImageView cvPublisher;
+    private String nim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +39,14 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Detail Item");
 
+        loadProfile(getIntent().getStringExtra("Publisher"));
+
         ivImage = findViewById(R.id.ivImage);
         tvTitle = findViewById(R.id.tvTitle);
         tvLocation = findViewById(R.id.tvLocation);
         tvDescription = findViewById(R.id.tvDescription);
+        tvPublisher = findViewById(R.id.tvPublisher);
+        cvPublisher = findViewById(R.id.cvPublisher);
 
         tvTitle.setText(getIntent().getStringExtra("Title"));
         tvDescription.setText(getIntent().getStringExtra("Description"));
@@ -43,6 +59,35 @@ public class DetailActivity extends AppCompatActivity {
                 openWhatsappContact(getIntent().getStringExtra("PhoneNumber"));
             }
         });
+    }
+
+    private void loadProfile(String publisher) {
+        FirebaseDatabase
+                .getInstance()
+                .getReference("Profile")
+                .child(publisher)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        tvPublisher.setText(dataSnapshot.child("name").getValue(String.class));
+                        nim = dataSnapshot.child("nim").getValue(String.class);
+                        String url = "http://www.amikom.ac.id/public/fotomhs/20"
+                                + nim.substring(0,2)
+                                +"/"
+                                + nim.replace(".","_") +".jpg";
+                        Glide.with(getApplicationContext())
+                                .load(url)
+                                .centerCrop()
+                                .override(100)
+                                .placeholder(R.drawable.common_full_open_on_phone)
+                                .into(cvPublisher);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d("publisherError", "onCancelled: "+databaseError.getMessage());
+                    }
+                });
     }
 
     private void openWhatsappContact(String number) {

@@ -7,6 +7,7 @@ public class Home {
     private String location;
     private String phoneNumber;
     private String image;
+    private String publisher;
 
     public String getTitle() {
         return title;
@@ -48,4 +49,7 @@ public class Home {
         this.image = image;
     }
 
+    public String getPublisher() { return publisher; }
+
+    public void setPublisher(String publisher) { this.publisher = publisher; }
 }

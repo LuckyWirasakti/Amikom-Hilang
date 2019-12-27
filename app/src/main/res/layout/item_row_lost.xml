@@ -30,11 +30,11 @@
             android:textStyle="bold"
             tools:text="@string/lost_name" />
         <TextView
-            android:id="@+id/tv_item_detail"
+            android:id="@+id/tv_item_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            tools:text="@string/lost_date" />
+            tools:text="Parkiran Amikom" />
     </LinearLayout>
 </RelativeLayout>

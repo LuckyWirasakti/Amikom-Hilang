@@ -49,7 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 .apply(new RequestOptions().override(55, 55))
                 .into(holder.img_item_photo);
         holder.tv_item_name.setText(home.getTitle());
-        holder.tv_item_detail.setText(home.getDescription());
+        holder.tv_item_location.setText(home.getLocation());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +65,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView img_item_photo;
-        private TextView tv_item_name, tv_item_detail;
+        private TextView tv_item_name, tv_item_location;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
 
             img_item_photo = itemView.findViewById(R.id.img_item_photo);
             tv_item_name = itemView.findViewById(R.id.tv_item_name);
-            tv_item_detail = itemView.findViewById(R.id.tv_item_detail);
+            tv_item_location = itemView.findViewById(R.id.tv_item_location);
         }
     }
     private Bitmap base64ToBitmap(String b64) {

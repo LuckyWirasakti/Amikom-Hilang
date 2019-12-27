@@ -5,6 +5,7 @@ public class Report {
     private String description;
     private String phoneNumber;
     private String location;
+    private String Publisher;
 
     public String getImage() {
         return image;
@@ -51,4 +52,8 @@ public class Report {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getPublisher() { return Publisher; }
+
+    public void setPublisher(String publisher) { Publisher = publisher; }
 }
