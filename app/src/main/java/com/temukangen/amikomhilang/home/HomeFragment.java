@@ -8,9 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.report.ReportActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,23 +38,32 @@ public class HomeFragment extends Fragment {
     private TextInputEditText edtSearch;
     private DatabaseReference databaseReference;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         edtSearch = root.findViewById(R.id.edtSearch);
         recyclerView = root.findViewById(R.id.rv_item_lost);
-        recyclerView.setHasFixedSize(true);
 
+        recyclerView.setHasFixedSize(true);
         homeAdapter = new HomeAdapter(list);
         recyclerView.setAdapter(homeAdapter);
 
+        fab(root);
         getHome();
         searchHome();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         return root;
+    }
+
+    private void fab(View root) {
+        root.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ReportActivity.class));
+            }
+        });
     }
 
     private void searchHome() {
@@ -76,13 +87,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
     }
 
     private void search(String s) {
@@ -127,6 +131,7 @@ public class HomeFragment extends Fragment {
                 showSelectedItem(data);
             }
         });
+
     }
 
     private void showSelectedItem(Home data) {
