@@ -38,7 +38,7 @@ public class ReportFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report, container, false);
 
-        recyclerView = root.findViewById(R.id.rv_item_lost);
+        recyclerView = root.findViewById(R.id.rv_item_publish);
 
         recyclerView.setHasFixedSize(true);
         reportAdapter = new ReportAdapter(list);

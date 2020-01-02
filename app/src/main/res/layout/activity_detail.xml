@@ -32,6 +32,15 @@
                 android:text="Lucky Adhikrisna W"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/white" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                app:backgroundTint="@color/colorRed"
+                android:src="@android:drawable/ic_menu_delete" />
         </FrameLayout>
         <TextView
             android:layout_width="match_parent"
@@ -114,6 +123,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/cvPublisher"
                 android:text="Lucky Adhikrisna Wirasakti" />
+
         </RelativeLayout>
         <Button
             android:id="@+id/btnContactPerson"

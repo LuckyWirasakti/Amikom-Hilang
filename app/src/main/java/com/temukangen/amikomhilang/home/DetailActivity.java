@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,7 +33,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tvPublisher;
     private CircleImageView cvPublisher;
     private String nim;
-
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +55,19 @@ public class DetailActivity extends AppCompatActivity {
         tvLocation.setText(getIntent().getStringExtra("Location"));
         ivImage.setImageBitmap(base64ToBitmap(getIntent().getStringExtra("Image")));
 
+
+
         findViewById(R.id.btnContactPerson).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openWhatsappContact(getIntent().getStringExtra("PhoneNumber"));
             }
         });
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        if (getIntent().getStringExtra("Publisher")==FirebaseAuth.getInstance().getCurrentUser().getUid()) {
+            fab.show();
+        }
+
     }
 
     private void loadProfile(String publisher) {
