@@ -1,8 +1,6 @@
-package com.temukangen.amikomhilang.report;
+package com.temukangen.amikomhilang.adapter;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.temukangen.amikomhilang.R;
-import com.temukangen.amikomhilang.home.Home;
-import com.temukangen.amikomhilang.home.HomeAdapter;
+import com.temukangen.amikomhilang.lib.ImageUtil;
+import com.temukangen.amikomhilang.model.Report;
 
 import java.util.ArrayList;
 
@@ -41,7 +39,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     @Override
     public void onBindViewHolder(@NonNull final ReportAdapter.ReportViewHolder holder, int position) {
         final Report report = reportArrayList.get(position);
-        Bitmap bitmap = base64ToBitmap(report.getImage());
+        Bitmap bitmap = ImageUtil.convert(report.getImage());
         Glide.with(holder.itemView.getContext())
                 .load(bitmap)
                 .apply(new RequestOptions().override(55, 55))
@@ -78,10 +76,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             tv_item_loct = itemView.findViewById(R.id.tv_item_loct);
         }
     }
-    private Bitmap base64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-    }
+
     public interface OnItemClickCallback {
         void onItemClicked(Report data);
     }

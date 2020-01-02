@@ -1,28 +1,26 @@
-package com.temukangen.amikomhilang.report;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.temukangen.amikomhilang;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.temukangen.amikomhilang.R;
-
-import java.io.ByteArrayOutputStream;
+import com.temukangen.amikomhilang.lib.ImageUtil;
+import com.temukangen.amikomhilang.model.Report;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -124,15 +122,8 @@ public class ReportActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     bitmap = (Bitmap) data.getExtras().get("data");
                     ivImage.setImageBitmap(bitmap);
-                    image = bitmapToBase64(bitmap);
+                    image = ImageUtil.convert(bitmap);
                 }
         }
-    }
-
-    private String bitmapToBase64(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

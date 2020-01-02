@@ -1,6 +1,5 @@
-package com.temukangen.amikomhilang.profile;
+package com.temukangen.amikomhilang.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
-import com.temukangen.amikomhilang.home.DetailActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,8 +24,6 @@ public class ProfileFragment extends Fragment {
 
     private TextView tvNim, tvName;
     private CircleImageView cvImage;
-    private FirebaseUser firebaseUser;
-    private FirebaseAuth firebaseAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,13 +37,10 @@ public class ProfileFragment extends Fragment {
         tvNim = root.findViewById(R.id.tvNim);
         cvImage = root.findViewById(R.id.cvImage);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-
         FirebaseDatabase
                 .getInstance()
                 .getReference("Profile")
-                .child(firebaseUser.getUid())
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

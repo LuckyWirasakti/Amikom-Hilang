@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.home;
+package com.temukangen.amikomhilang.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,8 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.temukangen.amikomhilang.DashboardActivity;
+import com.temukangen.amikomhilang.DetailActivity;
 import com.temukangen.amikomhilang.R;
-import com.temukangen.amikomhilang.report.ReportActivity;
+import com.temukangen.amikomhilang.adapter.HomeAdapter;
+import com.temukangen.amikomhilang.model.Report;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +34,7 @@ import java.util.Iterator;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<Home> list = new ArrayList<>();
+    private ArrayList<Report> list = new ArrayList<>();
     private HomeAdapter homeAdapter;
     private TextInputEditText edtSearch;
     private DatabaseReference databaseReference;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ReportActivity.class));
+                startActivity(new Intent(getContext(), DashboardActivity.ReportActivity.class));
             }
         });
     }
@@ -105,8 +106,10 @@ public class HomeFragment extends Fragment {
                     list.clear();
                     for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                     {
-                        Home home = dataSnapshot1.getValue(Home.class);
-                        list.add(home);
+                        Report report;
+                        report = dataSnapshot1.getValue(Report.class);
+                        report.setPrimaryKey(dataSnapshot1.getKey());
+                        list.add(report);
                     }
 
                     setAdapterValueChanged();
@@ -127,15 +130,16 @@ public class HomeFragment extends Fragment {
 
         homeAdapter.setOnItemClickCallback(new HomeAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(Home data) {
+            public void onItemClicked(Report data) {
                 showSelectedItem(data);
             }
         });
 
     }
 
-    private void showSelectedItem(Home data) {
+    private void showSelectedItem(Report data) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra("PrimaryKey", data.getPrimaryKey());
         intent.putExtra("Title", data.getTitle());
         intent.putExtra("Location", data.getLocation());
         intent.putExtra("PhoneNumber", data.getPhoneNumber());
@@ -156,8 +160,12 @@ public class HomeFragment extends Fragment {
                         list = new ArrayList<>();
                         for (Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator(); iterator.hasNext(); ) {
                             DataSnapshot dataSnapshot1 = iterator.next();
-                            Home home = dataSnapshot1.getValue(Home.class);
-                            list.add(home);
+
+                            Report report;
+                            report = dataSnapshot1.getValue(Report.class);
+                            report.setPrimaryKey(dataSnapshot1.getKey());
+
+                            list.add(report);
                         }
 
                         Collections.reverse(list);

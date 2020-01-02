@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.profile;
+package com.temukangen.amikomhilang.model;
 
 public class Profile {
 

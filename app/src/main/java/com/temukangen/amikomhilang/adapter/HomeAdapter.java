@@ -1,12 +1,9 @@
-package com.temukangen.amikomhilang.home;
+package com.temukangen.amikomhilang.adapter;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,17 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.lib.ImageUtil;
+import com.temukangen.amikomhilang.model.Report;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
-    private ArrayList<Home> homeArrayList;
+    private ArrayList<Report> reportArrayList;
 
-    public HomeAdapter(ArrayList<Home> homeArrayList) {
-        this.homeArrayList = homeArrayList;
+    public HomeAdapter(ArrayList<Report> homeArrayList) {
+        this.reportArrayList = homeArrayList;
     }
 
     @NonNull
@@ -42,26 +39,26 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     }
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
-        final Home home = homeArrayList.get(position);
-        Bitmap bitmap = base64ToBitmap(home.getImage());
+        Report report = reportArrayList.get(position);
+        Bitmap bitmap = ImageUtil.convert(report.getImage());
         Glide.with(holder.itemView.getContext())
                 .load(bitmap)
                 .apply(new RequestOptions().override(55, 55))
                 .into(holder.img_item_photo);
-        holder.tv_item_name.setText(home.getTitle());
-        holder.tv_item_detail.setText(home.getDescription());
-        holder.tv_item_loct.setText(home.getLocation());
+        holder.tv_item_name.setText(report.getTitle());
+        holder.tv_item_detail.setText(report.getDescription());
+        holder.tv_item_loct.setText(report.getLocation());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickCallback.onItemClicked(homeArrayList.get(holder.getAdapterPosition()));
+                onItemClickCallback.onItemClicked(reportArrayList.get(holder.getAdapterPosition()));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return homeArrayList.size();
+        return reportArrayList.size();
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
@@ -80,11 +77,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             tv_item_loct = itemView.findViewById(R.id.tv_item_loct);
         }
     }
-    private Bitmap base64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-    }
+
     public interface OnItemClickCallback {
-        void onItemClicked(Home data);
+        void onItemClicked(Report data);
     }
 }

@@ -1,6 +1,8 @@
-package com.temukangen.amikomhilang.report;
+package com.temukangen.amikomhilang.model;
 
 public class Report {
+
+    private String primaryKey;
     private String title;
     private String description;
     private String phoneNumber;
@@ -19,6 +21,14 @@ public class Report {
 
     public Report() {
 
+    }
+
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
     public String getTitle() {

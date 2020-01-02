@@ -1,4 +1,4 @@
-package com.temukangen.amikomhilang.report;
+package com.temukangen.amikomhilang.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
-import com.temukangen.amikomhilang.home.DetailActivity;
-import com.temukangen.amikomhilang.home.Home;
-import com.temukangen.amikomhilang.home.HomeAdapter;
+import com.temukangen.amikomhilang.adapter.ReportAdapter;
+import com.temukangen.amikomhilang.DetailActivity;
+import com.temukangen.amikomhilang.model.Report;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +62,7 @@ public class ReportFragment extends Fragment {
     }
     private void showSelectedItem(Report data) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra("PrimaryKey", data.getPrimaryKey());
         intent.putExtra("Title", data.getTitle());
         intent.putExtra("Location", data.getLocation());
         intent.putExtra("PhoneNumber", data.getPhoneNumber());
@@ -86,7 +86,11 @@ public class ReportFragment extends Fragment {
                         list = new ArrayList<>();
                         for (Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator(); iterator.hasNext(); ) {
                             DataSnapshot dataSnapshot1 = iterator.next();
-                            Report report = dataSnapshot1.getValue(Report.class);
+
+                            Report report;
+                            report = dataSnapshot1.getValue(Report.class);
+                            report.setPrimaryKey(dataSnapshot1.getKey());
+
                             list.add(report);
                         }
 

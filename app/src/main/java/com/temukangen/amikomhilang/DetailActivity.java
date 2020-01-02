@@ -1,27 +1,26 @@
-package com.temukangen.amikomhilang.home;
+package com.temukangen.amikomhilang;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.lib.ImageUtil;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,9 +30,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tvLocation;
     private TextView tvDescription;
     private TextView tvPublisher;
+    private Button btnDetail;
     private CircleImageView cvPublisher;
     private String nim;
-    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,33 +41,55 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Detail Item");
 
-        loadProfile(getIntent().getStringExtra("Publisher"));
-
         ivImage = findViewById(R.id.ivImage);
         tvTitle = findViewById(R.id.tvTitle);
         tvLocation = findViewById(R.id.tvLocation);
         tvDescription = findViewById(R.id.tvDescription);
         tvPublisher = findViewById(R.id.tvPublisher);
         cvPublisher = findViewById(R.id.cvPublisher);
+        btnDetail = findViewById(R.id.btnContactPerson);
+
+
 
         tvTitle.setText(getIntent().getStringExtra("Title"));
         tvDescription.setText(getIntent().getStringExtra("Description"));
         tvLocation.setText(getIntent().getStringExtra("Location"));
-        ivImage.setImageBitmap(base64ToBitmap(getIntent().getStringExtra("Image")));
+        ivImage.setImageBitmap(ImageUtil.convert(getIntent().getStringExtra("Image")));
 
+        loadButtonConfig();
+        loadProfile(getIntent().getStringExtra("Publisher"));
 
+    }
 
-        findViewById(R.id.btnContactPerson).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWhatsappContact(getIntent().getStringExtra("PhoneNumber"));
-            }
-        });
-        fab = (FloatingActionButton)findViewById(R.id.fab);
-        if (getIntent().getStringExtra("Publisher")==FirebaseAuth.getInstance().getCurrentUser().getUid()) {
-            fab.show();
+    private void loadButtonConfig() {
+        if(getIntent().getStringExtra("Publisher").equals(FirebaseAuth.getInstance().getUid())){
+            btnDetail.setText("Done");
+            btnDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseDatabase.getInstance()
+                            .getReference()
+                            .child("Report")
+                            .child(getIntent().getStringExtra("PrimaryKey"))
+                            .removeValue()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(), "Dropped successful", Toast.LENGTH_SHORT).show();
+                                    new Intent(getApplicationContext(), DashboardActivity.class);
+                                    finish();
+                                }
+                            });
+                }
+            });
+        } else {
+            findViewById(R.id.btnContactPerson).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openWhatsappContact(getIntent().getStringExtra("PhoneNumber"));
+                }
+            });
         }
-
     }
 
     private void loadProfile(String publisher) {
@@ -104,10 +126,5 @@ public class DetailActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SENDTO, uri);
         i.setPackage("com.whatsapp");
         startActivity(Intent.createChooser(i, ""));
-    }
-
-    private Bitmap base64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }
