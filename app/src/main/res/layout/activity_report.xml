@@ -1,12 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="@dimen/splash_size">
+        android:padding="@dimen/splash_size"
+        android:background="#FFFFFF">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -68,16 +70,16 @@
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_camera_alt_black_24dp" />
+            android:src="@drawable/ini" />
 
         <Button
             android:id="@+id/btnPublish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/btn_bg_rounded_corners"
             android:text="Publish"/>
     </LinearLayout>
 </ScrollView>
