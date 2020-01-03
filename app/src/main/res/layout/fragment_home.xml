@@ -33,5 +33,5 @@
         android:layout_margin="16dp"
         android:clickable="true"
         app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_create_black_24dp" />
+        android:src="@drawable/ic_forum_black_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
