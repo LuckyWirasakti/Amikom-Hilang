@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.ReportActivity;
 import com.temukangen.amikomhilang.adapter.ReportAdapter;
 import com.temukangen.amikomhilang.DetailActivity;
 import com.temukangen.amikomhilang.model.Report;
@@ -44,9 +45,17 @@ public class ReportFragment extends Fragment {
         recyclerView.setAdapter(reportAdapter);
 
         getReport();
-
+        fab(root);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return root;
+    }
+    private void fab(View root) {
+        root.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ReportActivity.class));
+            }
+        });
     }
     private void setAdapterValueChanged() {
         reportAdapter = new ReportAdapter(list);

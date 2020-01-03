@@ -15,6 +15,7 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
             android:hint="Search" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,6 +33,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_forum_black_24dp" />
+        app:backgroundTint="@color/colorAccent"
+        android:src="@android:drawable/stat_sys_upload" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
