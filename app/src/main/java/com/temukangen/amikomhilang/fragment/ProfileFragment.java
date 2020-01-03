@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,14 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.temukangen.amikomhilang.R;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends Fragment {
 
     private TextView tvNim;
     private TextView tvName;
     private TextView tvEmail;
-    private CircleImageView cvImage;
+    private ImageView ivImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class ProfileFragment extends Fragment {
         tvName = root.findViewById(R.id.tvName);
         tvNim = root.findViewById(R.id.tvNim);
         tvEmail = root.findViewById(R.id.tvEmail);
-        cvImage = root.findViewById(R.id.cvImage);
+        ivImage = root.findViewById(R.id.ivImage);
 
         FirebaseDatabase
                 .getInstance()
@@ -59,9 +58,9 @@ public class ProfileFragment extends Fragment {
                         Glide.with(getContext())
                                 .load(url)
                                 .centerCrop()
-                                .override(100)
+                                .override(150,200)
                                 .placeholder(R.drawable.photo)
-                                .into(cvImage);
+                                .into(ivImage);
                     }
 
                     @Override
