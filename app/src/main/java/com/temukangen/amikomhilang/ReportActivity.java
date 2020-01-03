@@ -82,6 +82,8 @@ public class ReportActivity extends AppCompatActivity {
                     report.setPublisher(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     report.setImage(image);
 
+                    findViewById(R.id.btnPublish).setVisibility(View.GONE);
+
                     FirebaseDatabase
                             .getInstance()
                             .getReference()
