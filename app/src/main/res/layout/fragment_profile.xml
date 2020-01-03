@@ -8,7 +8,6 @@
     android:layout_height="match_parent">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cvImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -23,12 +22,21 @@
         android:textSize="18sp"
         android:textAlignment="center"
         />
+
     <TextView
-        android:id="@+id/tvNim"
-        android:layout_marginTop="5dp"
+        android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_marginTop="5dp"
         android:textAlignment="center"
-        />
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvNim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
 </LinearLayout>

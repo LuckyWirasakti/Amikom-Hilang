@@ -22,7 +22,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
-    private TextView tvNim, tvName;
+    private TextView tvNim;
+    private TextView tvName;
+    private TextView tvEmail;
     private CircleImageView cvImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,6 +37,7 @@ public class ProfileFragment extends Fragment {
     private void loadProfile(View root) {
         tvName = root.findViewById(R.id.tvName);
         tvNim = root.findViewById(R.id.tvNim);
+        tvEmail = root.findViewById(R.id.tvEmail);
         cvImage = root.findViewById(R.id.cvImage);
 
         FirebaseDatabase
@@ -51,6 +54,8 @@ public class ProfileFragment extends Fragment {
 
                         tvName.setText(dataSnapshot.child("name").getValue(String.class));
                         tvNim.setText(dataSnapshot.child("nim").getValue(String.class));
+                        tvEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
                         Glide.with(getContext())
                                 .load(url)
                                 .centerCrop()

@@ -21,9 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.temukangen.amikomhilang.DashboardActivity;
 import com.temukangen.amikomhilang.DetailActivity;
 import com.temukangen.amikomhilang.R;
+import com.temukangen.amikomhilang.ReportActivity;
 import com.temukangen.amikomhilang.adapter.HomeAdapter;
 import com.temukangen.amikomhilang.model.Report;
 
@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), DashboardActivity.ReportActivity.class));
+                startActivity(new Intent(getContext(), ReportActivity.class));
             }
         });
     }
