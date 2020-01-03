@@ -79,6 +79,7 @@ public class ReportFragment extends Fragment {
                 .getReference()
                 .child("Report")
                 .orderByChild("publisher")
+                .startAt(Publisher)
                 .endAt(Publisher)
                 .addValueEventListener(new ValueEventListener() {
                     @Override

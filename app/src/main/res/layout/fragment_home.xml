@@ -33,5 +33,5 @@
         android:layout_margin="16dp"
         android:clickable="true"
         app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_forum_black_24dp" />
+        android:src="@android:drawable/ic_menu_upload" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
