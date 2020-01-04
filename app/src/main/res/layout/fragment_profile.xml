@@ -3,8 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -21,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:gravity="center">
             <ImageView
                 android:id="@+id/ivImage"
@@ -121,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:padding="30dp"
+                android:padding="20dp"
                 android:text="'The purpose of technology is not to confuse the brain but to serve the body'\n- William S. Burroughs -"
                 android:layout_marginBottom="50dp"/>
         </LinearLayout>

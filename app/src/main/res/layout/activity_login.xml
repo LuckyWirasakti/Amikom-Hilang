@@ -6,7 +6,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorAccent"
     tools:context=".LoginActivity">
 
     <androidx.cardview.widget.CardView

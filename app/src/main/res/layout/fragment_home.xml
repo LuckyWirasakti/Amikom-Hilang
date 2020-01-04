@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingHorizontal="10dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtSearch"
+        android:layout_margin="10dp"
+        android:background="@drawable/lv_bg_rounded_corners">
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingTop="10dp"
+            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+            android:paddingHorizontal="10dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="80dp"
         android:id="@+id/rv_item_lost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,6 +39,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimaryDark"
         android:src="@drawable/ic_forum_black_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
